@@ -16,4 +16,10 @@ export const env = envalid.cleanEnv(process.env, {
   // ========= GOOGLE =========
   GOOGLE_CLIENT_ID: envalid.str(),
   GOOGLE_CLIENT_SECRET: envalid.str(),
+
+  // ========= PINECONE =========
+  PINECONE_API_KEY: envalid.str(),
+
+  // ========= GEMINI =========
+  GEMINI_API_KEY: envalid.str(),
 });

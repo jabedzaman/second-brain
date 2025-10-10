@@ -9,15 +9,20 @@ function IndexPopup() {
   const { data, isPending, error } = authClient.useSession()
   console.log({ data, isPending, error })
 
-  const handleBookmark = () => {
-    if (data) {
-      chrome.tabs.query({ active: true, currentWindow: true }, (tabs) => {
-        const activeTab = tabs[0]
-        if (activeTab && activeTab.url) {
-          alert(`Bookmarked: ${activeTab.url}`)
-        }
-      })
-    }
+  const handleBookmark = async () => {
+    // get the current tab URL
+    const [tab] = await chrome.tabs.query({ active: true, currentWindow: true })
+    const url = tab?.url
+    if (!url) return
+    const res = await fetch("http://localhost:3000/api/bookmark", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ url })
+    })
+    const result = await res.json()
+    console.log(result)
+    // dismiss the popup
+    window.close()
   }
 
   if (isPending) {
