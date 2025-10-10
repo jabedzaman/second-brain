@@ -1,0 +1,7 @@
+packages:
+  - packages/*
+  - web
+
+onlyBuiltDependencies:
+  - '@tailwindcss/oxide'
+  - sharp

@@ -1,0 +1,18 @@
+{
+  "name": "brain",
+  "version": "0.1.0",
+  "description": "a second brain",
+  "scripts": {
+    "watch": "pnpm run -r watch"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/jabedzaman/brain.git"
+  },
+  "author": "hi@jabed.dev",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/jabedzaman/brain/issues"
+  },
+  "homepage": "https://github.com/jabedzaman/brain#readme"
+}
