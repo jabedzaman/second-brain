@@ -20,7 +20,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body
-        className={`${urbanist.className} antialiased bg-background text-primary`}
+        className={`${urbanist.className} antialiased bg-background text-foreground`}
       >
         {children}
       </body>

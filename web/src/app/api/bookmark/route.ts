@@ -19,11 +19,19 @@ export async function POST(request: NextRequest) {
 
   const { url } = data; // better dx
 
+  // check if the bookmark already exists
+  const exists = await prisma.site.findFirst({
+    where: { url },
+  });
+
+  // return the existing bookmark if it exists
+  if (exists) {
+    return new Response(JSON.stringify(exists), { status: 200 });
+  }
+
   // fetch metadata from the URL, e.g., title, description, etc.
   // save the bookmark to the database
   const result = await urlMetadata(url);
-
-  console.log("Fetched metadata:", JSON.stringify(result, null, 2));
 
   // generate embedding for the bookmark using GenAI
   // dimension: 1536, metric: cosine
@@ -39,7 +47,7 @@ export async function POST(request: NextRequest) {
   );
   await index.upsert([
     {
-      id: result.ogUrl || url,
+      id: result.url,
       values: embedding.embeddings?.length
         ? embedding.embeddings[0].values
         : [],
@@ -51,24 +59,18 @@ export async function POST(request: NextRequest) {
     },
   ]);
 
-  const exists = await prisma.site.findFirst({
-    where: { url: result.ogUrl || url },
-  });
-
   if (!exists) {
     await prisma.site.create({
       data: {
-        title: result.ogTitle,
-        description: result.ogDescription,
-        url: result.ogUrl || url,
+        title: result.title,
+        description: result.description,
+        url: url,
         charset: result.charset,
         locale: result.ogLocale,
         favicon: result.favicon,
       },
     });
   }
-
-  console.log("Bookmark saved:", JSON.stringify(result, null, 2));
 
   return new Response(JSON.stringify(result), { status: 200 });
 }
