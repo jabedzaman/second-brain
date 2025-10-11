@@ -74,7 +74,11 @@ export const SearchForm = () => {
       </Form>
 
       <div className="mt-4">
-        {isLoading ? (
+        {!hasSearched ? (
+          <div className="flex items-center justify-center py-8">
+            <p className="text-gray-500">Enter a query to search bookmarks.</p>
+          </div>
+        ) : isLoading ? (
           <div className="flex items-center justify-center py-8">
             <span className="ml-2 text-gray-600">Searching...</span>
           </div>
