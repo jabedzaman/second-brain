@@ -1,3 +1,5 @@
 import { createAuthClient } from "better-auth/react"
 
-export const authClient = createAuthClient({ baseURL: "http://localhost:3000" })
+import { API_URL } from "./CONSTS"
+
+export const authClient = createAuthClient({ baseURL: API_URL, plugins: [] })
