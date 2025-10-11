@@ -7,13 +7,21 @@ export interface SearchResult {
     title: string;
     url: string;
     description: string;
+    favicon?: string;
   };
 }
 
+import { headers } from "next/headers";
+import { auth } from "~/lib/auth";
 import { ai } from "~/lib/genai";
 import { pc } from "~/lib/pinecone";
 
 export const sementicSearch = async (query: string) => {
+  // get session
+  const session = await auth.api.getSession({ headers: await headers() });
+  if (!session?.user) {
+    throw new Error("Unauthorized");
+  }
   // generate embedding for the bookmark using GenAI
   // dimension: 1536, metric: cosine
   const embeddingContentResponse = await ai.models.embedContent({
@@ -33,6 +41,7 @@ export const sementicSearch = async (query: string) => {
     vector: embedding || [],
     topK: 20, // number of results to return
     includeMetadata: true,
+    filter: { userId: session.user.id },
   });
 
   const matches = result.matches || [];

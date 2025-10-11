@@ -1,9 +1,26 @@
+import Link from "next/link";
 import { SignInForm } from "./_components/sign-in.form";
+import { Brain } from "lucide-react";
 
 export default function Page() {
   return (
     <div className="h-[100dvh] flex flex-col md:flex-row font-geist w-[100dvw]">
-      <section className="flex-1 flex items-center justify-center p-8">
+      <section className="flex-1 flex items-center justify-center p-8 relative">
+        {/* App Branding - Top Left */}
+        <Link
+          href="/"
+          className="absolute top-8 left-8 flex items-center gap-3"
+        >
+          <div className="p-2 rounded-lg bg-primary/10">
+            <Brain className="w-6 h-6 text-primary" />
+          </div>
+          <div>
+            <h2 className="text-xl font-semibold tracking-tight">Brain</h2>
+            <p className="text-xs text-muted-foreground">Your second brain</p>
+          </div>
+        </Link>
+
+        {/* Sign In Form - Centered */}
         <div className="w-full max-w-md">
           <div className="flex flex-col gap-6">
             <h1 className="animate-element animate-delay-100 text-4xl md:text-5xl font-semibold leading-tight">

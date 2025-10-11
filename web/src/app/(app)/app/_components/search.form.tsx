@@ -3,8 +3,6 @@
 import * as React from "react";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
-import * as z from "zod";
-import { Loader2 } from "lucide-react";
 import { SearchResult, sementicSearch } from "../actions";
 import { Button } from "~/components/ui/button";
 import {
@@ -16,6 +14,7 @@ import {
 } from "~/components/ui/form";
 import { Input } from "~/components/ui/input";
 import { SearchFormData, searchSchema } from "./validation";
+import { toast } from "sonner";
 
 export const SearchForm = () => {
   const [results, setResults] = React.useState<Array<SearchResult>>([]);
@@ -24,9 +23,7 @@ export const SearchForm = () => {
 
   const form = useForm<SearchFormData>({
     resolver: zodResolver(searchSchema),
-    defaultValues: {
-      query: "",
-    },
+    defaultValues: { query: "" },
   });
 
   const onSubmit = async (values: SearchFormData) => {
@@ -36,7 +33,7 @@ export const SearchForm = () => {
       const data = await sementicSearch(values.query);
       setResults(data);
     } catch (error) {
-      console.error("Search failed:", error);
+      toast.error("Failed to fetch search results. Please try again.");
       setResults([]);
     } finally {
       setIsLoading(false);

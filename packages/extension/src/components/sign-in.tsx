@@ -1,6 +1,6 @@
 import * as React from "react"
 
-import { authClient } from "~/auth/client"
+import { authClient } from "~/lib/auth"
 
 export const SignIn = () => {
   const [loading, setLoading] = React.useState<boolean>(false)

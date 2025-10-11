@@ -23,8 +23,20 @@ model Site {
   charset     String?
   url         String  @unique
 
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
+  createdAt DateTime   @default(now())
+  updatedAt DateTime   @updatedAt
+  Bookmark  Bookmark[]
 
   @@map("sites")
+}
+
+model Bookmark {
+  id        String   @id @default(auto()) @map("_id") @db.ObjectId
+  userId    String   @db.ObjectId
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  site      Site?    @relation(fields: [siteId], references: [id])
+  siteId    String?  @db.ObjectId
+
+  @@map("bookmarks")
 }

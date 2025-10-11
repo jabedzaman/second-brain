@@ -7,3 +7,11 @@ import { env } from "~/config";
 export const pc = new Pinecone({
   apiKey: env.PINECONE_API_KEY,
 });
+
+/**
+ * Pinecone index instance for the "bookmarks" index.
+ */
+export const index = pc.Index(
+  "bookmarks",
+  "https://bookmarks-bfnfic0.svc.aped-4627-b74a.pinecone.io"
+);
