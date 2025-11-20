@@ -5,7 +5,7 @@
 
 second brain is your personal AI bookmark manager that combines the power of vector search and AI embeddings to organize and retrieve information from your saved bookmarks seamlessly
 
-## Features
+## Core Features
 
 - **Vector Database**: Utilizes Pinecone for efficient vector storage and retrieval
 - **AI Embeddings**: Uses GenAI embeddings for high-quality text representation
@@ -13,6 +13,10 @@ second brain is your personal AI bookmark manager that combines the power of vec
 - **Modern Web Interface**: Next.js-powered user-friendly dashboard
 - **Semantic Search**: Find bookmarks using natural language queries
 - **Automatic Categorization**: AI-powered bookmark organization
+
+## System Architecture
+
+[![System Architecture](./docs/diagram.png)](./docs/diagram.png)
 
 ## Tech Stack
 
@@ -32,7 +36,7 @@ second brain is your personal AI bookmark manager that combines the power of vec
 - **Plasmo Framework** - Browser extension SDK
 - **Chrome Extension APIs** - Browser integration
 
-## Installation
+## Setup & Run
 
 ### Prerequisites
 
